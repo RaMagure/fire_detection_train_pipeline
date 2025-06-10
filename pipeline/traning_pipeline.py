@@ -25,6 +25,11 @@ class LoadModel:
 
     def __call__(self, *args, **kwargs):
         return self.model(*args, **kwargs)
+
+    def train(self, *args, **kwargs):  # 🔧 Add this line
+        return self.model.train(*args, **kwargs)
+
+
     
 
 class TrainModel:
@@ -36,7 +41,7 @@ class TrainModel:
         self.data_path=download_to_data_folder(data_path_url,filename='fireDetection.7z')
 
     def train(self):
-        self.model.train(
+        self.model.model.train(
         data=is_data_yaml_present_and_extract_7z(self.data_path),
         epochs=self.epochs,
         imgsz=640,
